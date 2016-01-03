@@ -4,14 +4,13 @@ FROM alpine:3.2
 
 RUN echo "http://dl-4.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories && \
     echo "http://dl-4.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-    apk -uUv add curl maven openjdk8-jre && \
-    source /etc/profile
+    apk -uUv add curl maven openjdk8-jre
 
 COPY . /jentrata-msh
 
 WORKDIR /jentrata-msh
 
-RUN mvn clean install
+RUN source /etc/profile && mvn clean install
 
 # TODO: install tomcat 7.x
 # TODO: untar jentrata-msh-tomcat.tar.gz
