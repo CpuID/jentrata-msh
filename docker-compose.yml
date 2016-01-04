@@ -1,0 +1,19 @@
+jentrata-msh:
+  build: .
+  links:
+    - mysql
+  ports:
+    - "80:80"
+
+mysql:
+  image: mysql:5.7.10
+  environment:
+    # TODO
+    MYSQL_ROOT_PASSWORD: ""
+    MYSQL_DATABASE: ""
+    MYSQL_USER: ""
+    MYSQL_PASSWORD: ""
+  volumes:
+    - "./docker_mysql_db_and_grants.sql:/docker-entrypoint-initdb.d/docker_mysql_db_and_grants.sql"
+    - "./Dist/src/main/scripts/sql/mysql_ebms.sql:/docker-entrypoint-initdb.d/mysql_ebms.sql"
+    - "./Dist/src/main/scripts/sql/mysql_as2.sql:/docker-entrypoint-initdb.d/mysql_as2.sql"
